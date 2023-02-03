@@ -1,9 +1,23 @@
 import React from "react";
 import logo from "../../assets/logo.png";
+import { Actor, HttpAgent } from "@dfinity/agent";
+import { idlFactory } from "../../../declarations/nft";
+import { Principal } from "@dfinity/principal";
 
 function Item() {
 
-  const id = props.id;
+  const id = Principal.fromText(props.id);
+
+  const localHost = "http://localhost:8080/";
+
+  const agent = new HttpAgent({host: localHost});
+
+  async function loadNFT() {
+    const NFTActor = await Actor.createActor(idlFactory, {
+      agent,
+      canisterId: id,
+    })
+  }
 
   return (
     <div className="disGrid-item">
