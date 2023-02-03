@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../../assets/logo.png";
 import { Actor, HttpAgent } from "@dfinity/agent";
-import { idlFactory } from "../../../declarations/nft";
+import { idlFactory } from "../../../declarations/nft/index";
 import { Principal } from "@dfinity/principal";
 
-function Item() {
+function Item(props) {
+
+  const [name, setName] = useState();
 
   const id = Principal.fromText(props.id);
 
-  const localHost = "http://localhost:8080/";
+  const localHost = "http://localhost:8000/";
 
   const agent = new HttpAgent({host: localHost});
 
@@ -16,8 +18,15 @@ function Item() {
     const NFTActor = await Actor.createActor(idlFactory, {
       agent,
       canisterId: id,
-    })
+    });
+
+    const name = await NFTActor.getName();
+    setName(name);
   }
+
+  useEffect(() => {
+    loadNFT();
+  }, [])
 
   return (
     <div className="disGrid-item">
@@ -28,7 +37,7 @@ function Item() {
         />
         <div className="disCardContent-root">
           <h2 className="disTypography-root makeStyles-bodyText-24 disTypography-h5 disTypography-gutterBottom">
-            CryptoDunks #312<span className="purple-text"></span>
+            {name}<span className="purple-text"></span>
           </h2>
           <p className="disTypography-root makeStyles-bodyText-24 disTypography-body2 disTypography-colorTextSecondary">
             Owner: sdfsdf-erwerv-sdf

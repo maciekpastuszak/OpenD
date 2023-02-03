@@ -37,7 +37,7 @@ dfx deploy --argument='("CryptoDunks #123", principal "yhnky-yvzb5-tjllh-xw2qh-4
 
 4. Head to localhost
 
-http://localhost:8080/
+http://localhost:8000/
 
 # Minter Else HTML
 
