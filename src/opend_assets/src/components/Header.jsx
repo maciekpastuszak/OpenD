@@ -48,7 +48,7 @@ function Header() {
         <Minter />
       </Route>
       <Route exact path="/collection">
-        <Gallery />
+        <Gallery title="My NFTs"/>
       </Route>
     </Switch>
     </BrowserRouter>
