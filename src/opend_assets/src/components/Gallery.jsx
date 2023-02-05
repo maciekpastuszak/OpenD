@@ -8,7 +8,7 @@ function Gallery() {
       <div className="disGrid-root disGrid-container disGrid-spacing-xs-2">
         <div className="disGrid-root disGrid-item disGrid-grid-xs-12">
           <div className="disGrid-root disGrid-container disGrid-spacing-xs-5 disGrid-justify-content-xs-center"></div>
-          <Item />
+          <Item id="rrkah-fqaaa-aaaaa-aaaaq-cai"/>
         </div>
       </div>
     </div>

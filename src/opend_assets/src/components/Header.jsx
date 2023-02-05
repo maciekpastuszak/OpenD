@@ -38,16 +38,16 @@ function Header() {
       </header>
     </div>
     <Switch>
-      <Route path="/">
+      <Route exact path="/">
       <img className="bottom-space" src={homeImage} />
       </Route>
-      <Route path="/discover">
+      <Route exact path="/discover">
         <h1>Discover</h1>
       </Route>
-      <Route path="/minter">
+      <Route exact path="/minter">
         <Minter />
       </Route>
-      <Route path="/collection">
+      <Route exact path="/collection">
         <Gallery />
       </Route>
     </Switch>
