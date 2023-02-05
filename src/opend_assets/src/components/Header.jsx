@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import logo from "../../assets/logo.png";
 import  { BrowserRouter, Link, Switch, Route } from 'react-router-dom';
 import homeImage from "../../assets/home-img.png";
