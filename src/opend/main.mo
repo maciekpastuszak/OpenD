@@ -35,5 +35,13 @@ actor OpenD {
 
         ownedNFTs := List.push(nftId, ownedNFTs);
         mapOfOwners.put(owner, ownedNFTs)
+    };
+
+    public query func getOwnedNFTs(user: Principal) : async [Principal]{
+        var userNFTs : List.List<Principal> = switch (mapOfOwners.get(user)) {
+            case null List.nil<Principal>();
+            case (?result) result;
+        };
+        return List.toArray(userNFTs);
     }
 };
