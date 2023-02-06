@@ -4,6 +4,7 @@ import { Actor, HttpAgent } from "@dfinity/agent";
 import { idlFactory } from "../../../declarations/nft/index";
 import { Principal } from "@dfinity/principal";
 import Button from "./Button";
+import { opend } from "../../../declarations/opend/index";
 
 function Item(props) {
 
@@ -59,6 +60,8 @@ function Item(props) {
 
   async function sellItem() {
     console.log("set price" + price);
+    const listingResult = await opend.listItem(props.id, price);
+    console.log("Listing: " + listingResult);
   }
 
   return (
