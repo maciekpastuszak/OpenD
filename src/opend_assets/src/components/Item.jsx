@@ -18,6 +18,7 @@ function Item(props) {
 
   const localHost = "http://localhost:8000/";
   const agent = new HttpAgent({host: localHost});
+  agent.fetchRootKey();
   let NFTActor;
 
   async function loadNFT() {
