@@ -67,6 +67,10 @@ actor OpenD {
                return "Success";
         } else {
             return "You don't own th NFT";
-        }
+        };
+    };
+
+    public query func getOpenDCanisterID() :async Principal {
+        return Principal.fromActor(OpenD);
     }
 };
