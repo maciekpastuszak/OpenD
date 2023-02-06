@@ -60,7 +60,7 @@ function Item(props) {
 
   async function sellItem() {
     console.log("set price" + price);
-    const listingResult = await opend.listItem(props.id, price);
+    const listingResult = await opend.listItem(props.id, Number(price));
     console.log("Listing: " + listingResult);
   }
 
