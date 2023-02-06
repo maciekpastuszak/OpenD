@@ -11,6 +11,7 @@ function Item(props) {
   const [owner, setOwner] = useState();
   const [image, setImage] = useState();
   const [button, setButton] = useState();
+  const [priceInput, setPriceInput] = useState();
 
   const id = props.id;
 
@@ -34,16 +35,32 @@ function Item(props) {
     setOwner(owner.toText());
     setImage(image);
 
-    setButton(<Button handleClick={handleSell} />)
+    setButton(<Button handleClick={handleSell} text={"Sell"}/>)
   }
 
   useEffect(() => {
     loadNFT();
   }, [])
 
+  let price;
   function handleSell() {
-    console.log("Sell clicked")
+    console.log("Sell clicked");
+    setPriceInput(
+      <input
+        placeholder="Price in DANG"
+        type="number"
+        className="price-input"
+        value={price}
+        onChange={(e) => (price = e.target.value)}
+      />
+    );
+    setButton(<Button handleClick={sellItem} text={"Confirm"} />);
   }
+
+  async function sellItem() {
+    console.log("set price" + price);
+  }
+
   return (
     <div className="disGrid-item">
       <div className="disPaper-root disCard-root makeStyles-root-17 disPaper-elevation1 disPaper-rounded">
@@ -58,6 +75,7 @@ function Item(props) {
           <p className="disTypography-root makeStyles-bodyText-24 disTypography-body2 disTypography-colorTextSecondary">
             Owner: {owner}
           </p>
+          {priceInput}
           {button}
         </div>
       </div>
