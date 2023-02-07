@@ -5,6 +5,7 @@ import { idlFactory } from "../../../declarations/nft/index";
 import { Principal } from "@dfinity/principal";
 import Button from "./Button";
 import { opend } from "../../../declarations/opend/index";
+import CURRENT_USER_ID from "../index";
 
 function Item(props) {
 
@@ -56,7 +57,10 @@ function Item(props) {
         setButton(<Button handleClick={handleSell} text={"Sell"}/>)
       }
     } else if (props.role == "discover") {
-      setButton(<Button handleClick={handleBuy} text={"Buy"}/>)
+      const originalOwner = await opend.getOriginalOwner(props.id);
+      if (originalOwner != CURRENT_USER_ID.toText()) {
+        setButton(<Button handleClick={handleBuy} text={"Buy"}/>)
+      }
     }
   }
 
