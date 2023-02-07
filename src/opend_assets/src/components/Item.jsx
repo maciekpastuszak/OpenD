@@ -21,6 +21,8 @@ function Item(props) {
 
   const localHost = "http://localhost:8000/";
   const agent = new HttpAgent({host: localHost});
+
+    //TODO: When deploy live, remove the following line.
   agent.fetchRootKey();
   let NFTActor;
 
@@ -34,22 +36,29 @@ function Item(props) {
     const owner = await NFTActor.getOwner();
     const imageData = await NFTActor.getAsset();
     const imageContent = new Uint8Array(imageData);
-    const image = URL.createObjectURL(new Blob([imageContent.buffer], {type: "image/png"}))
+    const image = URL.createObjectURL(
+      new Blob([imageContent.buffer], {type: "image/png"})
+    );
 
     setName(name);
     setOwner(owner.toText());
     setImage(image);
 
-    const nftIsListed = await opend.isListed(props.id);
+    if(props.role == "collection") {
 
-    if (nftIsListed) {
-      setOwner("OpenD");
-      setBlur({filter: "blur(4px)"});
-      setSellStatus("Listed");
-    } else [
-      setButton(<Button handleClick={handleSell} text={"Sell"}/>)
-    ];
-  };
+      const nftIsListed = await opend.isListed(props.id);
+
+      if (nftIsListed) {
+        setOwner("OpenD");
+        setBlur({filter: "blur(4px)"});
+        setSellStatus("Listed");
+      } else {
+        setButton(<Button handleClick={handleSell} text={"Sell"}/>)
+      }
+    } else if (props.role == "discover") {
+      setButton(<Button handleClick={handleBuy} text={"Buy"}/>)
+    }
+  }
 
   useEffect(() => {
     loadNFT();
@@ -88,6 +97,10 @@ function Item(props) {
         setSellStatus("Listed");
       }
     }
+  }
+
+  async function handleBuy() {
+    console.log("Buy was triggered")
   }
 
   return (
