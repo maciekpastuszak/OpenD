@@ -19,7 +19,7 @@ function Header() {
 
     const listedNFTIds = await opend.getListedNFTs();
     console.log(listedNFTIds);
-    setListedGallery(<Gallery title="Discover" ids={listedNFTIds} />);
+    setListingGallery(<Gallery title="Discover" ids={listedNFTIds} />);
   };
 
   useEffect(() => {
