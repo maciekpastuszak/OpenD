@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import logo from "../../assets/logo.png";
 import { Actor, HttpAgent } from "@dfinity/agent";
 import { idlFactory } from "../../../declarations/nft/index";
+import { idlFactory as tokenIdlFactory } from "../../../declarations/nft/token";
 import { Principal } from "@dfinity/principal";
 import Button from "./Button";
 import { opend } from "../../../declarations/opend/index";
 import CURRENT_USER_ID from "../index";
 import PriceLabel from "./PriceLabel";
+import { token } from "../../../declarations/token/index";
 
 function Item(props) {
 
@@ -110,6 +112,16 @@ function Item(props) {
 
   async function handleBuy() {
     console.log("Buy was triggered")
+    const tokenActor = await Actor.createActor(tokenIdlFactory, {
+      agent,
+      canisterId: Principal.fromText("rrkah-fqaaa-aaaaa-aaaaq-cai"),
+    });
+
+    const sellerId = await opend.getOriginalOwner(props.id);
+    const itemPrice = await opend.getListedNFTPrice(props.id);
+
+    const result = await tokenActor.transfer(sellerId, itemPrice);
+    console.log(result);
   }
 
   return (
