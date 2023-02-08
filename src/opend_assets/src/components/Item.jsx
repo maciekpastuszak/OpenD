@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import logo from "../../assets/logo.png";
 import { Actor, HttpAgent } from "@dfinity/agent";
 import { idlFactory } from "../../../declarations/nft/index";
-import { idlFactory as tokenIdlFactory } from "../../../declarations/nft/token";
+import { idlFactory as tokenIdlFactory } from "../../../declarations/token";
 import { Principal } from "@dfinity/principal";
 import Button from "./Button";
 import { opend } from "../../../declarations/opend/index";
