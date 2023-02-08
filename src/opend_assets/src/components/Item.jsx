@@ -121,8 +121,11 @@ function Item(props) {
     const itemPrice = await opend.getListedNFTPrice(props.id);
 
     const result = await tokenActor.transfer(sellerId, itemPrice);
-    console.log(result);
-  }
+    if (result == "Success") {
+      const transferResult = await opend.completePurchase(props.id, sellerId, CURRENT_USER_ID);
+      console.log("purchase: " + transferResult );
+    }
+  };
 
   return (
     <div className="disGrid-item">
